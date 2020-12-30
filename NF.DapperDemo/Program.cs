@@ -2,6 +2,9 @@
 using System;
 using static NF.Dapper.DapperManager;
 
+/// <summary>
+/// 1.0
+/// </summary>
 namespace NF.DapperDemo
 {
     class Program
@@ -13,7 +16,7 @@ namespace NF.DapperDemo
         }
         static void Main(string[] args)
         {
-            NDapperLog.Receive += msg; 
+            NDapperLog.Receive += msg;
 
             string ConnectionStr = "server=(local);UID=sa;PWD=sa;database=test";
             string mysqlhost = "Host = 127.0.0.1; UserName = root; Password = @; Database = KLine; Port = 3316; CharSet = utf8; Allow Zero Datetime = true;";
