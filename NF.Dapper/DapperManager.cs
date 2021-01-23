@@ -9,7 +9,7 @@ using System.Data.SQLite;
 /// </summary>
 namespace NF.Dapper
 {
-    public static partial class DapperManager
+    public  partial class DapperManager
     {
         /// <summary>
         /// 创建Dapper对象；默认为SqlServer
