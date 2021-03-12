@@ -8,6 +8,7 @@ namespace NF.DapperDemo
 {
     class Program
     {
+       
         public class KLine
         {
             public int ID { get; set; }
@@ -20,8 +21,13 @@ namespace NF.DapperDemo
             string ConnectionStr = "server=(local);UID=sa;PWD=sa;database=test";
             string mysqlhost = "Host = 127.0.0.1; UserName = root; Password = @; Database = KLine; Port = 3316; CharSet = utf8; Allow Zero Datetime = true;";
 
-            NDapper dbSqlLite = DapperManager.CreateDatabase(@"symbo444.db", DBType.SqlLite);
-            ConnectionState DapperState = dbSqlLite.State();
+            NDapper dbSqlLite = DapperManager.CreateDatabase(@"262.db", DBType.SqlLite);
+            string str = dbSqlLite.strconn();
+            ConnectionState ss= dbSqlLite.State();
+            Console.WriteLine(str);
+            Console.ReadKey();
+            string v=Configdb.Get("db6","3");
+           
             string createtb = "create table  hsi1903_min1 (id int, symbol varchar(50))";
             int x = dbSqlLite.Execute(createtb);
 

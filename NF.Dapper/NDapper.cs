@@ -27,7 +27,14 @@ namespace NF.Dapper
             this.conn = conn;
         }
 
-
+        /// <summary>
+        /// 数据库地址连接字符串
+        /// </summary>
+        /// <returns></returns>
+        public string strconn()
+        {
+            return conn.ConnectionString;
+        }
 
         #region 判断数据库连接状态
         /// <summary>

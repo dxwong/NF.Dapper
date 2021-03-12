@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Data.SQLite;
+using System.IO;
 //using Oracle.ManagedDataAccess.Client;需要请自行引用NuGet包
 
 /// <summary>
@@ -22,7 +23,8 @@ namespace NF.Dapper
         {
             if (dbType == DBType.SqlLite)
             {
-                strconn = string.Format("Data Source={0}", strconn);
+                string dbfile = System.AppDomain.CurrentDomain.BaseDirectory + strconn;
+                strconn = string.Format("Data Source={0}", dbfile);
                 return new NDapper(new SQLiteConnection(strconn));
             }
 
