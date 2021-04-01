@@ -150,7 +150,8 @@ namespace NF.Dapper
                 catch (Exception ex)
                 {
                     NDapperLog.write(ex.ToString(), "Query");
-                    return default(List<T>);
+                    return new List<T>();
+                    //return default(List<T>);
                 }
             }
             else
@@ -183,7 +184,7 @@ namespace NF.Dapper
                 catch (Exception ex)
                 {
                     NDapperLog.write(ex.ToString(), "QueryAsync");
-                    return null;
+                    return new List<T>();
                 }
             }
             else

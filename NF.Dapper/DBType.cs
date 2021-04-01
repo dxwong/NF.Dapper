@@ -12,7 +12,7 @@ namespace NF.Dapper
     public enum DBType
     {
         SqlLite,
-        SqlServer,
+        MSSQL,
         MySql,
         Oracle,
         Npgsql

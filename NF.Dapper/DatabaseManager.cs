@@ -26,7 +26,7 @@ namespace NF.Dapper
                 return CreateDatabase(ConnectionString, DBType.MySql);
             }
             
-            return CreateDatabase(ConnectionString, DBType.SqlServer);
+            return CreateDatabase(ConnectionString, DBType.MSSQL);
         }
 
         /// <summary>
@@ -57,12 +57,12 @@ namespace NF.Dapper
             #endregion
 
             #region MSSQL
-            if (DBType == DBType.SqlServer)
+            if (DBType == DBType.MSSQL)
             {
                 SqlDataAdapter sqlda = new SqlDataAdapter();
                 sqlda.SelectCommand = new SqlCommand();
                 sqlda.SelectCommand.Connection = new SqlConnection(strconn);
-                return new Database(sqlda, DBType.SqlServer);
+                return new Database(sqlda, DBType.MSSQL);
             }
             #endregion
 
@@ -149,7 +149,7 @@ namespace NF.Dapper
                 if (SQLText.ToLower().IndexOf("update") > -1 && thisDBType == DBType.MySql) { SQLText = SQLText.Replace("\\", "\\\\"); }
                 if (SQLText.ToLower().IndexOf("insert") > -1)
                 {
-                    if (thisDBType == DBType.SqlServer) { SQLText += " SELECT @@IDENTITY"; }
+                    if (thisDBType == DBType.MSSQL) { SQLText += " SELECT @@IDENTITY"; }
                     if (thisDBType == DBType.MySql) { SQLText = SQLText.Replace("\\", "\\\\"); SQLText += " ;SELECT LAST_INSERT_ID()"; }
                     mCommand.CommandText = SQLText;
                     object o = mCommand.ExecuteScalar();//第一行第一列的值如果是非int,ExecuteScalar会返回null
@@ -210,7 +210,7 @@ namespace NF.Dapper
                 mCommand.Connection.Open();
                 if (SQLText.ToLower().IndexOf("insert") > -1)
                 {
-                    if (thisDBType == DBType.SqlServer) { SQLText += " ;SELECT @@IDENTITY"; }
+                    if (thisDBType == DBType.MSSQL) { SQLText += " ;SELECT @@IDENTITY"; }
                     if (thisDBType == DBType.MySql) { SQLText += " ;SELECT LAST_INSERT_ID()"; }
                     mCommand.CommandText = SQLText;
                     object o = mCommand.ExecuteScalar();//第一行第一列的值如果是非int,ExecuteScalar会返回null

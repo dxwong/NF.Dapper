@@ -19,7 +19,7 @@ namespace NF.Dapper
         /// <param name="dbType">数据库类型</param>
         /// <param name="WriteLog">是否写错误日志</param>
         /// <returns></returns>
-        public static NDapper CreateDatabase(string strconn, DBType dbType = DBType.SqlServer)
+        public static NDapper CreateDatabase(string strconn, DBType dbType = DBType.MSSQL)
         {
             if (dbType == DBType.SqlLite)
             {
@@ -33,7 +33,7 @@ namespace NF.Dapper
                 return new NDapper(new MySqlConnection(strconn));
             }
 
-            if (dbType == DBType.SqlServer)
+            if (dbType == DBType.MSSQL)
             {
                 return new NDapper(new SqlConnection(strconn));
             }

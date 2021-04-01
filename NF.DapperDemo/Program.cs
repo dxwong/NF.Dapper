@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static Configdb;
 
 namespace NF.DapperDemo
 {
@@ -16,12 +17,16 @@ namespace NF.DapperDemo
         }
         static void Main(string[] args)
         {
+            NDapper dbSqlLite = DapperManager.CreateDatabase(@"configss.db", DBType.SqlLite);
+            //var c1 = dbSqlLite.Query<config>("select * from sysConfig");
+            List<config> c = dbSqlLite.Query<config>("select * from sysConfig").ToList();
+
+
             NDapperLog.Receive += msg; 
 
             string ConnectionStr = "server=(local);UID=sa;PWD=sa;database=test";
             string mysqlhost = "Host = 127.0.0.1; UserName = root; Password = @; Database = KLine; Port = 3316; CharSet = utf8; Allow Zero Datetime = true;";
 
-            NDapper dbSqlLite = DapperManager.CreateDatabase(@"262.db", DBType.SqlLite);
             string str = dbSqlLite.strconn();
             ConnectionState ss= dbSqlLite.State();
             Console.WriteLine(str);
@@ -59,14 +64,14 @@ namespace NF.DapperDemo
 
 
 
-            NDapper dbss = DapperManager.CreateDatabase(ConnectionStr, DBType.SqlServer);
+            NDapper dbss = DapperManager.CreateDatabase(ConnectionStr, DBType.MSSQL);
             var state = dbss.State();
             var list = dbss.Query<KLine>("select id,symbol from pp2009_min10");
 
-            NDapper dbss1 = DapperManager.CreateDatabase(ConnectionStr, DBType.SqlServer);
+            NDapper dbss1 = DapperManager.CreateDatabase(ConnectionStr, DBType.MSSQL);
             var list1 = dbss1.QueryAsync<KLine>("select id,symbol from pp2009_min11");
 
-            NDapper dbss2 = DapperManager.CreateDatabase(ConnectionStr, DBType.SqlServer);
+            NDapper dbss2 = DapperManager.CreateDatabase(ConnectionStr, DBType.MSSQL);
             var list2 = dbss2.Query<KLine>("select id,symbol from pp2009_min12");
 
             KLine ks = new KLine();
