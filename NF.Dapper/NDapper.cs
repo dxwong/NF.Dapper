@@ -72,69 +72,6 @@ namespace NF.Dapper
         /// <param name="sql">sql语句</param>
         /// <param name="dbConnKey">数据库连接</param>
         /// <param name="param">sql查询参数</param>
-        /// <param name="commandTimeout">超时时间</param>
-        /// <param name="commandType">命令类型</param>
-        /// <returns></returns>
-        public T QueryFirst<T>(string sql, object param = null, bool buffered = true, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
-        {
-            if (DbTransaction == null)
-            {
-                try
-                {
-                    return conn.QueryFirstOrDefault<T>(sql, param, null, commandTimeout, commandType);
-                }
-                catch (Exception ex)
-                {
-                    NDapperLog.write(ex.ToString(), "QueryFirst");
-                    return default(T);
-                }
-            }
-            else
-            {
-                return DbTransaction.Connection.QueryFirstOrDefault<T>(sql, param, DbTransaction, commandTimeout, commandType);
-            }
-
-        }
-
-        /// <summary>
-        /// 查询(异步版本)
-        /// </summary>
-        /// <typeparam name="T">返回类型</typeparam>
-        /// <param name="sql">sql语句</param>
-        /// <param name="dbConnKey">数据库连接</param>
-        /// <param name="param">sql查询参数</param>
-        /// <param name="commandTimeout">超时时间</param>
-        /// <param name="commandType">命令类型</param>
-        /// <returns></returns>
-        public async Task<T> QueryFirstAsync<T>(string sql, object param = null, bool buffered = true, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
-        {
-            if (DbTransaction == null)
-            {
-                try
-                {
-                    return await conn.QueryFirstOrDefaultAsync<T>(sql, param, null, commandTimeout, commandType);
-                }
-                catch (Exception ex)
-                {
-                    NDapperLog.write(ex.ToString(), "QueryFirstAsync");
-                    return default(T);
-                }
-            }
-            else
-            {
-                return await DbTransaction.Connection.QueryFirstOrDefaultAsync<T>(sql, param, DbTransaction, commandTimeout, commandType);
-            }
-
-        }
-
-
-        /// <summary>
-        /// 查询
-        /// </summary>
-        /// <typeparam name="T">返回类型</typeparam>
-        /// <param name="sql">sql语句</param>
-        /// <param name="dbConnKey">数据库连接</param>
-        /// <param name="param">sql查询参数</param>
         /// <param name="buffered">是否缓冲</param>
         /// <param name="commandTimeout">超时时间</param>
         /// <param name="commandType">命令类型</param>
@@ -193,6 +130,70 @@ namespace NF.Dapper
             }
 
         }
+
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <param name="sql">sql语句</param>
+        /// <param name="dbConnKey">数据库连接</param>
+        /// <param name="param">sql查询参数</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="commandType">命令类型</param>
+        /// <returns></returns>
+        public T QueryFirst<T>(string sql, object param = null, bool buffered = true, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
+        {
+            if (DbTransaction == null)
+            {
+                try
+                {
+                    return conn.QueryFirstOrDefault<T>(sql, param, null, commandTimeout, commandType);
+                }
+                catch (Exception ex)
+                {
+                    NDapperLog.write(ex.ToString(), "QueryFirst");
+                    return default(T);
+                }
+            }
+            else
+            {
+                return DbTransaction.Connection.QueryFirstOrDefault<T>(sql, param, DbTransaction, commandTimeout, commandType);
+            }
+
+        }
+
+        /// <summary>
+        /// 查询(异步版本)
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <param name="sql">sql语句</param>
+        /// <param name="dbConnKey">数据库连接</param>
+        /// <param name="param">sql查询参数</param>
+        /// <param name="commandTimeout">超时时间</param>
+        /// <param name="commandType">命令类型</param>
+        /// <returns></returns>
+        public async Task<T> QueryFirstAsync<T>(string sql, object param = null, bool buffered = true, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
+        {
+            if (DbTransaction == null)
+            {
+                try
+                {
+                    return await conn.QueryFirstOrDefaultAsync<T>(sql, param, null, commandTimeout, commandType);
+                }
+                catch (Exception ex)
+                {
+                    NDapperLog.write(ex.ToString(), "QueryFirstAsync");
+                    return default(T);
+                }
+            }
+            else
+            {
+                return await DbTransaction.Connection.QueryFirstOrDefaultAsync<T>(sql, param, DbTransaction, commandTimeout, commandType);
+            }
+
+        }
+
 
 
 

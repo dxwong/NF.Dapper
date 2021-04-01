@@ -18,7 +18,7 @@ namespace NF.DapperDemo
         static void Main(string[] args)
         {
             NDapper dbSqlLite = DapperManager.CreateDatabase(@"configss.db", DBType.SqlLite);
-            //var c1 = dbSqlLite.Query<config>("select * from sysConfig");
+            var c1 = dbSqlLite.QueryFirst<config>("select * from sysConfig");
             List<config> c = dbSqlLite.Query<config>("select * from sysConfig").ToList();
 
 
@@ -38,7 +38,7 @@ namespace NF.DapperDemo
 
             //匿名
             var result = dbSqlLite.Execute("Insert into hsi1903_min1 values (@id, @symbol)",  new { id = 565, symbol = "123'456@qq.com" });
-            KLine listtest = dbSqlLite.QueryFirst<KLine>("select id,symbol from hsi1903_min001");
+            var listtest = dbSqlLite.QueryFirst<object>("select id,symbol from hsi1903_min1 ");
 
             //实体
             KLine k = new KLine();
