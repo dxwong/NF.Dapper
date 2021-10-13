@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Threading.Tasks;
 
 /// <summary>
@@ -15,7 +16,6 @@ namespace NF.Dapper
     /// </summary>
     public class NDapper
     {
-
         public IDbTransaction DbTransaction { get; set; }
         private readonly IDbConnection conn;
 
@@ -35,6 +35,37 @@ namespace NF.Dapper
         {
             return conn.ConnectionString;
         }
+
+        #region ListToDataTable
+        /// <summary>
+        /// ListToDataTable
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        public DataTable ToDataTable<TEntity>(List<TEntity> entities)
+        {
+            if (entities == null) { return new DataTable(); }
+
+            Type type = typeof(TEntity);
+            PropertyInfo[] properties = type.GetProperties();
+            DataTable dt = new DataTable(type.Name);
+            foreach (var item in properties)
+            {
+                dt.Columns.Add(new DataColumn(item.Name) { DataType = item.PropertyType });
+            }
+            foreach (var item in entities)
+            {
+                DataRow row = dt.NewRow();
+                foreach (var property in properties)
+                {
+                    row[property.Name] = property.GetValue(item);
+                }
+                dt.Rows.Add(row);
+            }
+            return dt;
+        } 
+        #endregion
 
         #region 判断数据库连接状态
         /// <summary>

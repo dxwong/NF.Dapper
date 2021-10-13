@@ -17,12 +17,19 @@ namespace NF.DapperDemo
         }
         static void Main(string[] args)
         {
-            NDapper dbSqlLite = DapperManager.CreateDatabase(@"configss.db", DBType.SqlLite);
-            var c1 = dbSqlLite.QueryFirst<config>("select * from sysConfig");
-            List<config> c = dbSqlLite.Query<config>("select * from sysConfig").ToList();
+            NDapper dbSqlLite = DapperManager.CreateDatabase(@"config.db", DBType.SqlLite);
+            //var c1 = dbSqlLite.QueryFirst<config>("select * from sysConfig");
+            //List<config> c = dbSqlLite.Query<config>("select * from sysConfig").ToList();
+            //DataTable dt = dbSqlLite.ToDataTable(c);
+
+            //NDapperLog.Receive += msg;
 
 
-            NDapperLog.Receive += msg; 
+            string OracelConn = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=ORCL)));Persist Security Info=True;User ID=system;Password=orcl;";
+            NDapper dbOrace = DapperManager.CreateDatabase(OracelConn, DBType.Oracle);
+            //var stateo = dbOrace.State();
+            List<config> c = dbOrace.Query<config>("select * from JRSC.Config").ToList();
+
 
             string ConnectionStr = "server=(local);UID=sa;PWD=sa;database=test";
             string mysqlhost = "Host = 127.0.0.1; UserName = root; Password = @; Database = KLine; Port = 3316; CharSet = utf8; Allow Zero Datetime = true;";
