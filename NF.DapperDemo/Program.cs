@@ -28,7 +28,7 @@ namespace NF.DapperDemo
             string OracelConn = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=ORCL)));Persist Security Info=True;User ID=system;Password=orcl;";
             NDapper dbOrace = DapperManager.CreateDatabase(OracelConn, DBType.Oracle);
             //var stateo = dbOrace.State();
-            List<config> c = dbOrace.Query<config>("select * from JRSC.Config").ToList();
+            List<config> c = dbOrace.Query<config>("select * from JRSC.config").ToList();
 
 
             string ConnectionStr = "server=(local);UID=sa;PWD=sa;database=test";

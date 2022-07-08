@@ -27,22 +27,22 @@ namespace NF.Dapper
             {
                 string dbfile = System.AppDomain.CurrentDomain.BaseDirectory + strconn;
                 strconn = string.Format("Data Source={0}", dbfile);
-                return new NDapper(new SQLiteConnection(strconn));
+                return new NDapper(new SQLiteConnection(strconn), dbType);
             }
 
             if (dbType == DBType.MySql)
             {
-                return new NDapper(new MySqlConnection(strconn));
+                return new NDapper(new MySqlConnection(strconn), dbType);
             }
 
             if (dbType == DBType.MSSQL)
             {
-                return new NDapper(new SqlConnection(strconn));
+                return new NDapper(new SqlConnection(strconn), dbType);
             }
 
             if (dbType == DBType.Oracle)
             {
-                return new NDapper(new OracleConnection(strconn));//请自行引用NuGet包
+                return new NDapper(new OracleConnection(strconn), dbType);//请自行引用NuGet包
                 //string connString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=130.147.246.144)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=ECMS)));Persist Security Info=True;User ID=system;Password=Service01;";
             }
 

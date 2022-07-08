@@ -18,13 +18,15 @@ namespace NF.Dapper
     {
         public IDbTransaction DbTransaction { get; set; }
         private readonly IDbConnection conn;
+        public DBType thisDBType;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public NDapper(IDbConnection conn)
+        public NDapper(IDbConnection conn, DBType thisDBType)
         {
             this.conn = conn;
+            this.thisDBType = thisDBType;
         }
 
         /// <summary>
